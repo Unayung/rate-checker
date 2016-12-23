@@ -19,6 +19,7 @@ xml.rss :version => "2.0" do
         xml.description currency.latest_rate.current_rate
         xml.author "from BoT"
         xml.pubDate currency.latest_rate.created_at.to_s
+        xml.link "http://rate.unayung.cc"+rate_path(currency.latest_rate.id)
         # xml.link "https://www.codingfish.com/blog/" + article.id.to_s + "-" + article.alias
         xml.guid currency.latest_rate.id
 

@@ -9,4 +9,8 @@ class RatesController < ApplicationController
       format.rss { render :layout => false }
     end
   end
+
+  def show
+    @rate = Rate.find(params[:id])
+  end
 end
