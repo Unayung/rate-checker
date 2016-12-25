@@ -12,7 +12,7 @@ xml.rss :version => "2.0" do
     for currency in @currencies
       xml.item do
         if currency.name
-          if currency.name == "USD" && currency.latest_rate.current_rate > 32
+          if currency.name == "USD" && currency.latest_rate.current_rate.to_f > 32.to_f
             xml.title currency.name + "@" + currency.latest_rate.current_rate + " !!!"
           else
             xml.title currency.name + "@" + currency.latest_rate.current_rate
