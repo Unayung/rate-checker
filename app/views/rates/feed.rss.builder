@@ -10,7 +10,7 @@ xml.rss :version => "2.0" do
     xml.language "en"
 
     for currency in @currencies
-      xml.entry do
+      xml.item do
         if currency.name
           xml.title currency.name
         else
