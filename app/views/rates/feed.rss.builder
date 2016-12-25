@@ -10,7 +10,7 @@ xml.rss :version => "2.0" do
     xml.language "en"
 
     for currency in @currencies
-      xml.item do
+      xml.entry do
         if currency.name
           xml.title currency.name
         else
@@ -21,7 +21,6 @@ xml.rss :version => "2.0" do
         xml.pubDate currency.latest_rate.created_at.to_s
         xml.link "http://rate.unayung.cc"+rate_path(currency.latest_rate.id)
         xml.guid currency.latest_rate.id
-
       end
     end
   end
