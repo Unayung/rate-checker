@@ -41,9 +41,9 @@ GEM
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
-    autoprefixer-rails (6.5.4)
+    autoprefixer-rails (6.6.0)
       execjs
-    bootstrap-sass (3.3.6)
+    bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.2)
@@ -54,7 +54,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.1.4)
+    capistrano-bundler (1.2.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-ext (1.2.1)
@@ -62,7 +62,7 @@ GEM
     capistrano-harrow (0.5.3)
     capistrano-passenger (0.2.0)
       capistrano (~> 3.0)
-    capistrano-rails (1.2.0)
+    capistrano-rails (1.2.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rake (0.1.0)
@@ -192,8 +192,8 @@ DEPENDENCIES
   autoprefixer-rails (~> 6.4)
   bootstrap-sass (~> 3.3.6)
   byebug
-  capistrano
-  capistrano-bundler (~> 1.1.2)
+  capistrano (~> 3.6)
+  capistrano-bundler (~> 1.2)
   capistrano-ext
   capistrano-passenger
   capistrano-rails (~> 1.1)
