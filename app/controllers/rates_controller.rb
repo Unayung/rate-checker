@@ -11,6 +11,7 @@ class RatesController < ApplicationController
   end
 
   def index
+    @currencies = Currency.all
     latest_rate = Rate.last
     @timestamp = latest_rate.updated_at
   end
