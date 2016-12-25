@@ -9,4 +9,14 @@ class RatesController < ApplicationController
   def show
     @rate = Rate.find(params[:id])
   end
+
+  def index
+    latest_rate = Rate.last
+    @timestamp = latest_rate.updated_at
+  end
+
+  def refresh
+    Rate.update
+    redirect_to rates_path
+  end
 end
