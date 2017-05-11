@@ -33,9 +33,9 @@ xml.rss :version => "2.0" do
       end
     end
     xml.item do
-      xml.title = "妮妮笑一個 :)"
-      xml.content = "笑一個笑一個"
-      xml.author = "龍龍"
+      xml.title "妮妮笑一個 :)"
+      xml.content "笑一個笑一個"
+      xml.author "龍龍"
       xml.pubDate currency.latest_rate.created_at.to_s
       xml.link "http://www.ilovenini.tw"
       xml.guid 9999
