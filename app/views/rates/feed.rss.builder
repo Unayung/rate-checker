@@ -12,14 +12,16 @@ xml.rss :version => "2.0" do
     for currency in @currencies
       xml.item do
         if currency.name
-          if currency.latest_rate.current_rate > currency.previous_rate.current_rate
-            amount = currency.latest_rate.current_rate - currency.previous_rate.current_rate
+          if currency.latest_rate.current_rate.to_f > currency.previous_rate.current_rate.to_f
+            amount = currency.latest_rate.current_rate.to_f - currency.previous_rate.current_rate.to_f
             mark = " (上漲 #{amount})"
-          else
-            amount = currency.previous_rate.current_rate - currency.latest_rate.current_rate
+          elsif currency.latest_rate.current_rate.to_f < currency.previous_rate.current_rate.to_f
+            amount = currency.previous_rate.current_rate.to_f - currency.latest_rate.current_rate.to_f
             mark = " (下跌 #{amount})"
+          else
+            mark = " (不變)"
           end
-          xml.title currency.name + "@" + currency.latest_rate.current_rate + mark
+          xml.title currency.name + " @" + currency.latest_rate.current_rate + mark
         else
           xml.title ""
         end
