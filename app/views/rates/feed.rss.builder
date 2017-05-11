@@ -3,7 +3,7 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "匯率提醒"
+    xml.title "男友小提醒"
     xml.author "Chen Chia Yang"
     xml.description "RateChecker is a simple exchange rate notifier"
     xml.link "https://www.linkedin.com/in/chia-yang-chen-468b6938?trk=hp-identity-name"
@@ -31,6 +31,9 @@ xml.rss :version => "2.0" do
         xml.link "http://rate.unayung.cc"+rate_path(currency.latest_rate.id)
         xml.guid currency.latest_rate.id
       end
+    end
+    xml.item do
+      xml.title = "妮妮笑一個 :)"
     end
   end
 end
