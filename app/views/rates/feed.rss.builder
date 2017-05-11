@@ -14,10 +14,10 @@ xml.rss :version => "2.0" do
         if currency.name
           if currency.latest_rate.current_rate.to_f > currency.previous_rate.current_rate.to_f
             amount = currency.latest_rate.current_rate.to_f - currency.previous_rate.current_rate.to_f
-            mark = " (上漲 #{amount})"
+            mark = " (上漲 #{amount.round(4)})"
           elsif currency.latest_rate.current_rate.to_f < currency.previous_rate.current_rate.to_f
             amount = currency.previous_rate.current_rate.to_f - currency.latest_rate.current_rate.to_f
-            mark = " (下跌 #{amount})"
+            mark = " (下跌 #{amount.round(4)})"
           else
             mark = " (不變)"
           end
