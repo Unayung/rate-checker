@@ -4,7 +4,6 @@ xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
     xml.title "星座小提醒"
-    xml.author "Chen Chia Yang"
     xml.description "AstroChecker is a simple notifier"
     xml.link "https://www.linkedin.com/in/chia-yang-chen-468b6938?trk=hp-identity-name"
     xml.language "en"
@@ -26,11 +25,11 @@ xml.rss :version => "2.0" do
         #   xml.title ""
         # end
         xml.title astro.date
-        xml.content astro.description
-        xml.author "from 唐綺陽占星"
-        xml.pubDate astro.created_at.to_s
+        xml.description astro.description
+        xml.author "unayung@gmail.com"
+        xml.pubDate astro.created_at.rfc822
         xml.link astro.link
-        xml.guid astro.id
+        xml.guid astro.link
       end
     end
     # xml.item do
