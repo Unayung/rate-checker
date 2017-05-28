@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'astros/feed'
   get 'rates/feed'
   get 'rates/refresh'
   resources :rates

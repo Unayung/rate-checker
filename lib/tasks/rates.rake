@@ -73,4 +73,30 @@ task :app_version_checker => :environment do
   Net::HTTP.post_form(slack_hook_uri, { "payload" => msg_payload.to_json })
   end  
 end
+
+task :astro_checker => :environment do
+  index_url = "http://www.astroinfo.com.tw"
+  raw = RestClient.get(index_url)
+  index_page = Nokogiri::HTML(raw)
+
+  day_luck_link = index_page.css('div.view-posts-dayluck a').attr('href').value
+
+  if Astro.where("link = ?", index_url+day_luck_link).size == 0
+    page_raw = RestClient.get(index_url+day_luck_link)
+    page_content = Nokogiri::HTML(page_raw)
+    date = page_content.css('span.date-display-single').text
+    astro = Astro.new
+    astro.date = date
+
+    page_content.css('div.field-items p').each do |p|
+      if p.text.include?("天蠍")
+        astro.description = p.text
+      end
+    end
+    astro.link = index_url+day_luck_link
+    astro.save
+  end
+  
+end
+
 # end
