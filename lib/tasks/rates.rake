@@ -31,46 +31,47 @@ task :app_version_checker => :environment do
   play_store_data = Nokogiri::HTML(play_store_html)
   app_store_data = Nokogiri::HTML(app_store_html)
   android_version = play_store_data.css("div.content[@itemprop = 'softwareVersion']").text.strip
-  ios_version = app_store_data.css("span[@itemprop = 'softwareVersion']").text.strip
+  # ios_version = app_store_data.css("span[@itemprop = 'softwareVersion']").text.strip
+  ios_version = app_store_data.css("p.whats-new__latest__version").text.split(" ")[1]
   puts android_version
   puts ios_version
   last_android_record = AppVersion.where(:platform => "android").last
   last_ios_record = AppVersion.where(:platform => 'ios').last
 
-  if (last_android_record.nil? || last_android_record.version != android_version)
+  if (android_version.size > 0 && (last_android_record.nil? || last_android_record.version != android_version))
   #存起來
-  a = AppVersion.new(platform: "android", version: android_version)
-  a.save
-  #通知
-  msg_payload = {
-    "channel"    => "#product-team",
-    "username"   => "版本機機人",
-    "color"      => "#cba",
-    "fields"     => [{
-      "title" => "偵測到新版本",
-      "value" => "Android #{android_version} 版本上架啦！"
-      }],
-    "icon_emoji" => ":robot_face:"
-  }
-  Net::HTTP.post_form(slack_hook_uri, { "payload" => msg_payload.to_json })
+    a = AppVersion.new(platform: "android", version: android_version)
+    a.save
+    #通知
+    msg_payload = {
+      "channel"    => "#product-team",
+      "username"   => "版本機機人",
+      "color"      => "#cba",
+      "fields"     => [{
+        "title" => "偵測到新版本",
+        "value" => "Android #{android_version} 版本上架啦！"
+        }],
+      "icon_emoji" => ":robot_face:"
+    }
+    Net::HTTP.post_form(slack_hook_uri, { "payload" => msg_payload.to_json })
   end
 
-  if (last_ios_record.nil? || last_ios_record.version != ios_version)
+  if (ios_version.size > 0 && (last_ios_record.nil? || last_ios_record.version != ios_version))
   #存起來
-  b = AppVersion.new(platform: "ios", version: ios_version)
-  b.save
-  #通知
-  msg_payload = {
-    "channel"    => "#product-team",
-    "username"   => "版本機機人",
-    "color"      => "#cba",
-    "fields"     => [{
-      "title" => "偵測到新版本",
-      "value" => "iOS #{ios_version} 版本上架啦！"
-      }],
-    "icon_emoji" => ":robot_face:"
-  }
-  Net::HTTP.post_form(slack_hook_uri, { "payload" => msg_payload.to_json })
+    b = AppVersion.new(platform: "ios", version: ios_version)
+    b.save
+    #通知
+    msg_payload = {
+      "channel"    => "#product-team",
+      "username"   => "版本機機人",
+      "color"      => "#cba",
+      "fields"     => [{
+        "title" => "偵測到新版本",
+        "value" => "iOS #{ios_version} 版本上架啦！"
+        }],
+      "icon_emoji" => ":robot_face:"
+    }
+    Net::HTTP.post_form(slack_hook_uri, { "payload" => msg_payload.to_json })
   end  
 end
 
