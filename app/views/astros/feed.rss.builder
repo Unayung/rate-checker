@@ -28,8 +28,8 @@ xml.rss :version => "2.0" do
         xml.description astro.description
         xml.author "unayung@gmail.com (Chen Chia Yang)"
         xml.pubDate astro.created_at.rfc822
-        xml.link astro.link
-        xml.guid astro.link
+        xml.link "http://rate.unayung.cc"+astro_path(astro.id)
+        xml.guid "http://rate.unayung.cc"+astro_path(astro.id)
       end
     end
     # xml.item do

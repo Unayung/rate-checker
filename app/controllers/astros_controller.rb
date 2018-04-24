@@ -5,4 +5,8 @@ class AstrosController < ApplicationController
       format.rss { render :layout => false }
     end
   end
+
+  def show
+    @astro = Astro.find(params[:id])
+  end
 end
