@@ -11,12 +11,17 @@ namespace :rates do
     download = open(url)
     filename = DateTime.now.strftime('%Y%m%d-%H%M%S')
     IO.copy_stream(download, "./public/csv_files/#{filename}.csv")
+    report = Report.new
+    report.title = "匯率更新"
+    report.content = ""
     CSV.foreach("./public/csv_files/#{filename}.csv", :headers => :first_row) do |row|
       if list.include?(row[0].upcase)
         currency = Currency.find_by(:name => row[0].upcase)
         currency.rates.create(:current_rate => row[12].to_s)
+        report.content += "<p> #{currency.name} @ #{currency.latest_rate.current_rate.to_f} </p>"
       end
     end
+    report.save
   end
 end
 

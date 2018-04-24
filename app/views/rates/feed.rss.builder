@@ -8,36 +8,15 @@ xml.rss :version => "2.0" do
     xml.link "https://www.linkedin.com/in/chia-yang-chen-468b6938?trk=hp-identity-name"
     xml.language "zh-TW"
 
-    for currency in @currencies
+    for report in @reports
       xml.item do
-        if currency.name
-          if currency.latest_rate.current_rate.to_f > currency.previous_rate.current_rate.to_f
-            amount = currency.latest_rate.current_rate.to_f - currency.previous_rate.current_rate.to_f
-            mark = " (上漲 #{amount.round(4)})"
-          elsif currency.latest_rate.current_rate.to_f < currency.previous_rate.current_rate.to_f
-            amount = currency.previous_rate.current_rate.to_f - currency.latest_rate.current_rate.to_f
-            mark = " (下跌 #{amount.round(4)})"
-          else
-            mark = " (不變)"
-          end
-          xml.title currency.name + " @" + currency.latest_rate.current_rate + mark
-        else
-          xml.title ""
-        end
-        xml.description currency.latest_rate.current_rate
+        xml.title "#{report.title} #{report.updated_at.localtime.strftime('%H:%M')}"
+        xml.description report.content
         xml.author "unayung@gmail.com"
-        xml.pubDate currency.latest_rate.created_at.rfc822
-        xml.link "http://rate.unayung.cc"+rate_path(currency.latest_rate.id)
-        xml.guid "http://rate.unayung.cc"+rate_path(currency.latest_rate.id)
+        xml.pubDate report.created_at.rfc822
+        xml.link "http://rate.unayung.cc"+report_path(report.id)
+        xml.guid "http://rate.unayung.cc"+report_path(report.id)
       end
     end
-    # xml.item do
-    #   xml.title "妮妮笑一個 :)"
-    #   xml.content "笑一個笑一個"
-    #   xml.author "龍龍"
-    #   xml.pubDate currency.latest_rate.created_at.to_s
-    #   xml.link "http://www.ilovenini.tw"
-    #   xml.guid 9999
-    # end
   end
 end

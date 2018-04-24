@@ -1,6 +1,7 @@
 class RatesController < ApplicationController
   def feed
-    @currencies = Currency.all
+    # @currencies = Currency.all
+    @reports = Report.all
     respond_to do |format|
       format.rss { render :layout => false }
     end

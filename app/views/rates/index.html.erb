@@ -8,7 +8,7 @@
   <% @currencies.each do |currency| %>
   <tr>
     <td><%= currency.name %></td>
-    <td><%= currency.previous_rate.current_rate %></td>
+    <td><%= currency.previous_rate.try(:current_rate) %></td>
     <td> => </td>
     <td><%= currency.latest_rate.current_rate %></td>
   </tr>
