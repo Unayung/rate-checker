@@ -6,7 +6,7 @@ xml.rss :version => "2.0" do
     xml.title "星座小提醒"
     xml.description "AstroChecker is a simple notifier"
     xml.link "https://www.linkedin.com/in/chia-yang-chen-468b6938?trk=hp-identity-name"
-    xml.language "en"
+    xml.language "zh-TW"
 
     for astro in @astros
       xml.item do
@@ -26,7 +26,7 @@ xml.rss :version => "2.0" do
         # end
         xml.title astro.date
         xml.description astro.description
-        xml.author "unayung@gmail.com"
+        xml.author "unayung@gmail.com (Chen Chia Yang)"
         xml.pubDate astro.created_at.rfc822
         xml.link astro.link
         xml.guid astro.link

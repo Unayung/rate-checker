@@ -12,7 +12,7 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title "#{report.title} #{report.updated_at.localtime.strftime('%H:%M')}"
         xml.description report.content
-        xml.author "unayung@gmail.com"
+        xml.author "unayung@gmail.com (Chen Chia Yang)"
         xml.pubDate report.created_at.rfc822
         xml.link "http://rate.unayung.cc"+report_path(report.id)
         xml.guid "http://rate.unayung.cc"+report_path(report.id)
