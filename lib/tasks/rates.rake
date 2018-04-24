@@ -18,7 +18,7 @@ namespace :rates do
       if list.include?(row[0].upcase)
         currency = Currency.find_by(:name => row[0].upcase)
         currency.rates.create(:current_rate => row[12].to_s)
-        report.content += "<p> #{currency.name} @ #{currency.latest_rate.current_rate.to_f} </p>"
+        report.content += "#{currency.name} @ #{currency.latest_rate.current_rate.to_f} \r"
       end
     end
     report.save
